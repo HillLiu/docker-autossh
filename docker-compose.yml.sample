@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  remote-to-ssh:
+    image: hillliu/docker-autossh
+    environment:
+      - SSH_HOSTUSER=autossh
+      - SSH_HOSTNAME=your-ssh-server
+      - SSH_HOSTPORT=22
+      - SSH_TUNNEL_REMOTE=2222
+      - SSH_TUNNEL_HOST=your-target-server
+      - SSH_TUNNEL_LOCAL=22
+    restart: always
+    volumes:
+      - ./autossh_id_rsa:/id_rsa
