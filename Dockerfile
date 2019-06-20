@@ -13,5 +13,8 @@ ENV \
 
 RUN apk update && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories && \
-    apk add --update autossh && \
-    apk add --update openssh-client
+    apk add \ 
+      autossh \
+      openssh-client
+
+RUN rm -rf /var/cache/apk 
