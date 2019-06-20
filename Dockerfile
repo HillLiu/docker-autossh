@@ -1,7 +1,7 @@
 FROM alpine
 
 ENTRYPOINT ["/entrypoint.sh"]
-ADD /entrypoint.sh /entrypoint.sh
+COPY ./entrypoint.sh /entrypoint.sh
 
 ENV \
     TERM=xterm \
