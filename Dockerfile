@@ -1,7 +1,14 @@
-FROM alpine
+ARG VERSION=${VERSION:-[VERSION]}
 
-ENTRYPOINT ["/entrypoint.sh"]
-COPY ./entrypoint.sh /entrypoint.sh
+FROM alpine:3.15
+
+ARG VERSION
+
+# apk
+COPY ./install-packages.sh /usr/local/bin/install-packages
+RUN apk update && apk add bash bc \
+  && INSTALL_VERSION=$VERSION install-packages \
+  && rm /usr/local/bin/install-packages;
 
 ENV \
     TERM=xterm \
@@ -10,11 +17,5 @@ ENV \
     AUTOSSH_POLL=10             \
     AUTOSSH_FIRST_POLL=30       \
     AUTOSSH_LOGLEVEL=1
-
-RUN apk update && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories && \
-    apk add \ 
-      autossh \
-      openssh-client
-
-RUN rm -rf /var/cache/apk 
+COPY ./entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

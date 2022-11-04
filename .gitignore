@@ -1,3 +1,5 @@
+archive.tar
 .*.sw?
-*id_rsa*
+ver-*
+*id_*
 docker-compose.yml

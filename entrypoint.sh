@@ -1,7 +1,9 @@
 #!/bin/sh
 
-touch ${SSH_KEY_FILE:=/id_rsa}
-chmod 0400 ${SSH_KEY_FILE:=/id_rsa}
+SSH_KEY_FILE=${SSH_KEY_FILE:=/id_ed25519}
+
+touch $SSH_KEY_FILE
+chmod 0400 $SSH_KEY_FILE
 
 STRICT_HOSTS_KEY_CHECKING=no
 KNOWN_HOSTS=${SSH_KNOWN_HOSTS:=/known_hosts}

@@ -1,0 +1,4 @@
+repositoryName=docker-autossh
+repositoryOrgName=HillLiu
+dockerImageName=autossh
+dockerOrgName=hillliu

@@ -12,4 +12,4 @@ services:
       - SSH_TUNNEL_LOCAL=22
     restart: always
     volumes:
-      - ./autossh_id_rsa:/id_rsa
+      - ./autossh_id_ed25519:/id_ed25519
