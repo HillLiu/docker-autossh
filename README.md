@@ -20,3 +20,8 @@
 
 ## Inspire
    * https://github.com/jnovack/docker-autossh
+
+## Gen password
+```
+ssh-keygen -t ed25519 -o -a 100 -C "autossh@autossh" -f ./autossh_id_ed25519
+```
