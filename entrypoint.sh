@@ -19,29 +19,20 @@ let "DEFAULT_PORT += 32768"
 echo [INFO] Tunneling ${SSH_HOSTUSER:=root}@${SSH_HOSTNAME:=localhost}:${SSH_TUNNEL_REMOTE:=${DEFAULT_PORT}} to ${SSH_TUNNEL_HOST=localhost}:${SSH_TUNNEL_LOCAL:=22}
 eval $(ssh-agent)
 cat ${SSH_KEY_FILE} | ssh-add -k -
-echo autossh \
- -M 0 \
- -o StrictHostKeyChecking=${STRICT_HOSTS_KEY_CHECKING} ${KNOWN_HOSTS_ARG:=} \
- -o ServerAliveInterval=5 \
- -o ServerAliveCountMax=1 \
- -o "ExitOnForwardFailure yes" \
- -t -t \
- ${SSH_MODE:=-R} ${SSH_TUNNEL_REMOTE}:${SSH_TUNNEL_HOST}:${SSH_TUNNEL_LOCAL} \
- -p ${SSH_HOSTPORT:=22} \
- ${SSH_HOSTUSER}@${SSH_HOSTNAME}
+cmd="autossh"
+cmd="$cmd -M 0"
+cmd="$cmd -o StrictHostKeyChecking=${STRICT_HOSTS_KEY_CHECKING} ${KNOWN_HOSTS_ARG:=}"
+cmd="$cmd -o ServerAliveInterval=5"
+cmd="$cmd -o ServerAliveCountMax=1"
+cmd="$cmd -o ExitOnForwardFailure=yes"
+cmd="$cmd -t -t"
+cmd="$cmd ${SSH_MODE:=-R} ${SSH_TUNNEL_REMOTE}:${SSH_TUNNEL_HOST}:${SSH_TUNNEL_LOCAL}"
+cmd="$cmd -p ${SSH_HOSTPORT:=22}"
+cmd="$cmd ${SSH_HOSTUSER}@${SSH_HOSTNAME}"
+echo $cmd
 
 AUTOSSH_PIDFILE=/autossh.pid \
 AUTOSSH_POLL=10 \
 AUTOSSH_LOGLEVEL=0 \
 AUTOSSH_LOGFILE=/dev/stdout \
-autossh \
- -M 0 \
- -N \
- -o StrictHostKeyChecking=${STRICT_HOSTS_KEY_CHECKING} ${KNOWN_HOSTS_ARG:=}  \
- -o ServerAliveInterval=5 \
- -o ServerAliveCountMax=1 \
- -o "ExitOnForwardFailure yes" \
- -t -t \
- ${SSH_MODE:=-R} ${SSH_TUNNEL_REMOTE}:${SSH_TUNNEL_HOST}:${SSH_TUNNEL_LOCAL} \
- -p ${SSH_HOSTPORT:=22} \
- ${SSH_HOSTUSER}@${SSH_HOSTNAME}
+sh -c "$cmd"
