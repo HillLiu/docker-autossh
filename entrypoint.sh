@@ -17,7 +17,7 @@ fi
 DEFAULT_PORT=$RANDOM
 let "DEFAULT_PORT += 32768"
 echo [INFO] Tunneling ${SSH_HOSTUSER:=root}@${SSH_HOSTNAME:=localhost}:${SSH_TUNNEL_REMOTE:=${DEFAULT_PORT}} to ${SSH_TUNNEL_HOST=localhost}:${SSH_TUNNEL_LOCAL:=22}
-eval $(ssh-agent -s)
+eval $(ssh-agent)
 cat ${SSH_KEY_FILE} | ssh-add -k -
 echo autossh \
  -M 0 \
