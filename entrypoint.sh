@@ -21,7 +21,6 @@ eval $(ssh-agent)
 cat ${SSH_KEY_FILE} | ssh-add -k -
 echo autossh \
  -M 0 \
- -N \
  -o StrictHostKeyChecking=${STRICT_HOSTS_KEY_CHECKING} ${KNOWN_HOSTS_ARG:=} \
  -o ServerAliveInterval=5 \
  -o ServerAliveCountMax=1 \
