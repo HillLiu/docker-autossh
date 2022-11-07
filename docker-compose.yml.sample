@@ -7,9 +7,9 @@ services:
       - SSH_HOSTUSER=autossh
       - SSH_HOSTNAME=your-ssh-server
       - SSH_HOSTPORT=22
-      - SSH_TUNNEL_REMOTE=2222
-      - SSH_TUNNEL_HOST=your-target-server
-      - SSH_TUNNEL_LOCAL=22
+      - SSH_TUNNEL_FROM_HOST=your-target-server
+      - SSH_TUNNEL_FROM_PORT=22
+      - SSH_TUNNEL_TO_PORT=2222
     restart: always
     volumes:
       - ./autossh_id_ed25519:/id_ed25519
