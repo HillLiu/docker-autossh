@@ -4,7 +4,7 @@
 # Environment ${INSTALL_VERSION} pass from Dockerfile
 ###
 
-INSTALL="autossh openssh-client"
+INSTALL="autossh openssh-client busybox-extras"
 
 BUILD_DEPS=""
 
