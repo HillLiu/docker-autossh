@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 SSH_KEY_FILE=${SSH_KEY_FILE:=/id_ed25519}
 SSH_HOSTUSER=${SSH_HOSTUSER:=root}
@@ -30,7 +30,7 @@ cat ${SSH_KEY_FILE} | ssh-add -k -
 cmd="autossh"
 cmd="$cmd -M 0"
 cmd="$cmd -o StrictHostKeyChecking=${STRICT_HOSTS_KEY_CHECKING} ${KNOWN_HOSTS_ARG:=}"
-cmd="$cmd -o ServerAliveInterval=5"
+cmd="$cmd -o ServerAliveInterval=30"
 cmd="$cmd -o ServerAliveCountMax=1"
 cmd="$cmd -o ExitOnForwardFailure=yes"
 cmd="$cmd -t -t"
