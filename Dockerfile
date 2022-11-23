@@ -10,8 +10,9 @@ RUN apk update && apk add bash bc \
   && INSTALL_VERSION=$VERSION install-packages \
   && rm /usr/local/bin/install-packages;
 
+# https://linux.die.net/man/1/autossh
 ENV \
-    TERM=xterm \
+    AUTOSSH_PIDFILE=/autossh.pid \
     AUTOSSH_LOGFILE=/dev/stdout \
     AUTOSSH_GATETIME=30         \
     AUTOSSH_POLL=10             \
