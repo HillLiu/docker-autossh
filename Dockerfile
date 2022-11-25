@@ -6,7 +6,7 @@ ARG VERSION
 
 # apk
 COPY ./install-packages.sh /usr/local/bin/install-packages
-RUN apk update && apk add bash bc \
+RUN apk update \
   && INSTALL_VERSION=$VERSION install-packages \
   && rm /usr/local/bin/install-packages;
 
