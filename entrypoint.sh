@@ -30,13 +30,13 @@ cat ${SSH_KEY_FILE} | ssh-add -k -
 cmd="autossh"
 cmd="$cmd -M 0"
 cmd="$cmd -o StrictHostKeyChecking=${STRICT_HOSTS_KEY_CHECKING} ${KNOWN_HOSTS_ARG:=}"
-cmd="$cmd -o ServerAliveInterval=30"
-cmd="$cmd -o ServerAliveCountMax=3"
+cmd="$cmd -o ServerAliveInterval=60"
+cmd="$cmd -o ServerAliveCountMax=10"
 cmd="$cmd -o ExitOnForwardFailure=yes"
-cmd="$cmd -t -t"
+cmd="$cmd -t -t -q"
 cmd="$cmd ${SSH_TUNNEL_MODE} ${SSH_TUNNEL_TO_PORT}:${SSH_TUNNEL_FROM_HOST}:${SSH_TUNNEL_FROM_PORT}"
 cmd="$cmd -p ${SSH_HOSTPORT}"
-cmd="$cmd ${SSH_HOSTUSER}@${SSH_HOSTNAME}"
+cmd="$cmd ${SSH_HOSTUSER}@${SSH_HOSTNAME} -N"
 echo $cmd
 
 sh -c "$cmd"
