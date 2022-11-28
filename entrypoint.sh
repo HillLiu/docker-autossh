@@ -19,7 +19,7 @@ fi
 # Pick a random port above 32768
 DEFAULT_PORT=$RANDOM
 let "DEFAULT_PORT += 32768"
-SSH_TUNNEL_MODE=${SSH_TUNNEL_MODE:=-R}
+SSH_TUNNEL_MODE=${SSH_TUNNEL_MODE:=R}
 SSH_TUNNEL_FROM_PORT=${SSH_TUNNEL_FROM_PORT:=22}
 SSH_TUNNEL_TO_PORT=${SSH_TUNNEL_TO_PORT:=${DEFAULT_PORT}}
 
@@ -30,13 +30,13 @@ cat ${SSH_KEY_FILE} | ssh-add -k -
 cmd="autossh"
 cmd="$cmd -M 0"
 cmd="$cmd -o StrictHostKeyChecking=${STRICT_HOSTS_KEY_CHECKING} ${KNOWN_HOSTS_ARG:=}"
-cmd="$cmd -o ServerAliveInterval=120"
-cmd="$cmd -o ServerAliveCountMax=3"
+cmd="$cmd -o ServerAliveInterval=60"
+cmd="$cmd -o ServerAliveCountMax=10"
 cmd="$cmd -o ExitOnForwardFailure=yes"
-cmd="$cmd -t -t -q"
-cmd="$cmd ${SSH_TUNNEL_MODE} ${SSH_TUNNEL_TO_PORT}:${SSH_TUNNEL_FROM_HOST}:${SSH_TUNNEL_FROM_PORT}"
+cmd="$cmd -t -t"
+cmd="$cmd -${SSH_TUNNEL_MODE} ${SSH_TUNNEL_TO_PORT}:${SSH_TUNNEL_FROM_HOST}:${SSH_TUNNEL_FROM_PORT}"
 cmd="$cmd -p ${SSH_HOSTPORT}"
-cmd="$cmd ${SSH_HOSTUSER}@${SSH_HOSTNAME} -N"
+cmd="$cmd ${SSH_HOSTUSER}@${SSH_HOSTNAME}"
 echo $cmd
 
 sh -c "$cmd"

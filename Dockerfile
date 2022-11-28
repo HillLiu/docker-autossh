@@ -16,7 +16,7 @@ ENV \
     AUTOSSH_LOGFILE=/dev/stdout  \
     AUTOSSH_GATETIME=0           \
     AUTOSSH_POLL=120             \
-    AUTOSSH_FIRST_POLL=30        \
+    AUTOSSH_FIRST_POLL=60        \
     AUTOSSH_LOGLEVEL=7
 COPY ./entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
